@@ -3,12 +3,8 @@ name = "robo_orchard_build"
 dynamic = ["version"]
 description = "Building tools for the RoboOrchard project"
 readme = "README.md"
-authors = [
-    { name = "The RoboOrchard Team" }
-]
-dependencies = [
-    "setuptools"
-]
+authors = [{ name = "The RoboOrchard Team" }]
+dependencies = ["setuptools"]
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 classifiers = [
@@ -20,12 +16,10 @@ requires-python = ">=3.10"
 [project.optional-dependencies]
 protobuf = [
     "protobuf<6.0dev,>=5.26.1",
-    "grpcio-tools>=1.70.0",  # for proto schemas
+    "grpcio-tools>=1.70.0",     # for proto schemas
     "mypy-protobuf",
 ]
-pydantic = [
-    "protobuf-to-pydantic",
-]
+pydantic = ["protobuf-to-pydantic"]
 cpp = [
     "jinja2",
     "cpplint>=2.0.0",
@@ -38,9 +32,7 @@ cpp = [
     "isort>=5.13.2",
     "clang-format",
 ]
-all = [
-    "robo_orchard_build[protobuf,pydantic,cpp]"
-]
+all = ["robo_orchard_build[protobuf,pydantic,cpp]"]
 
 [project.scripts]
 RoboOrchardBuild-cpplint = "robo_orchard_build.lint.cpp_lint:main"
@@ -56,7 +48,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 include-package-data = true
-package-dir = {"robo_orchard_build" = "robo_orchard_build"}
+package-dir = { "robo_orchard_build" = "robo_orchard_build" }
 
 [tool.ruff]
 
@@ -105,14 +97,14 @@ target-version = "py310"
 [tool.ruff.lint]
 
 select = [
-    "E",  # flake8-errors
-    "F",  # pyflake
-    "I",  # isort
-    "B",  # flake8-bugber
-    "TID",  # flake8-tidy-imports
-    "D",  # pydocstyle
-    "Q",  # flake8-quotes
-    "W"   # flake8-warnings
+    "E",   # flake8-errors
+    "F",   # pyflake
+    "I",   # isort
+    "B",   # flake8-bugber
+    "TID", # flake8-tidy-imports
+    "D",   # pydocstyle
+    "Q",   # flake8-quotes
+    "W",   # flake8-warnings
 ]
 
 ignore = [
@@ -126,17 +118,14 @@ ignore = [
     "D101",
     "D301",
     "F403",
-    "B904",  # Within an `except` clause, raise exceptions with `raise ... from err` or `raise ... from None` to distinguish them from errors in exception handling
-    "B028",  # No explicit `stacklevel` keyword argument found
-    "D417",  # requires documentation for every function parameter.
+    "B904", # Within an `except` clause, raise exceptions with `raise ... from err` or `raise ... from None` to distinguish them from errors in exception handling
+    "B028", # No explicit `stacklevel` keyword argument found
+    "D417", # requires documentation for every function parameter.
 ]
 
 [tool.ruff.lint.isort]
 known-third-party = []
-no-lines-before = [
-    "future",
-    "standard-library"
-]
+no-lines-before = ["future", "standard-library"]
 combine-as-imports = true
 force-wrap-aliases = true
 
@@ -154,10 +143,7 @@ avoid-escape = false
 max-complexity = 18
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = [
-    "TID252",
-    "F401",
-]
+"__init__.py" = ["TID252", "F401"]
 
 [tool.ruff.format]
 
@@ -179,11 +165,8 @@ docstring-code-format = true
 enableExperimentalFeatures = false
 typeCheckingMode = "basic"
 reportRedeclaration = false
-include = [
-    "robo_orchard_build",
-    "tests",
-]
-# make pyright support editable install mode
-extraPaths = [
-    "."
-]
+include = ["robo_orchard_build", "tests"]
+# Do not include extraPaths because it will conflict with the vscode settings.
+# extraPaths = [
+#     "."
+# ]

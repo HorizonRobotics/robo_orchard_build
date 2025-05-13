@@ -26,6 +26,7 @@ def scan_folder(
     list_files: bool = True,
     max_depth: Optional[int] = None,
     exclude_dir: Iterable[str] = (),
+    verbose: bool = False,
 ) -> Iterable[str]:
     """Find files in a folder.
 
@@ -41,6 +42,8 @@ def scan_folder(
             If None, scan all. Defaults to None.
         exclude_dir (Iterable[str], optional): The directories to exclude.
             Defaults to ().
+        verbose (bool, optional): Whether to print the excluded directories.
+            Defaults to False.
 
     Returns:
         Iterable[str]: The file paths.
@@ -63,13 +66,15 @@ def scan_folder(
 
     for root, dirs, files in os.walk(folder):
         if root in exclude_dir:
-            print(f"Skipping excluded directory: {root}")
+            if verbose:
+                print(f"Skipping excluded directory: {root}")
             dirs[:] = []  # Do not traverse this folder
             continue
         if max_depth is not None and max_depth > 0:
             depth = root[len(folder) + 1 :].count(os.sep)  # noqa
             if depth >= max_depth:
-                print(f"Skipping directory {root} due to max depth")
+                if verbose:
+                    print(f"Skipping directory {root} due to max depth")
                 dirs[:] = []
                 continue
 
